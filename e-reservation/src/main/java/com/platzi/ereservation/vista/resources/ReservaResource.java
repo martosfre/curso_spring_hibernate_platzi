@@ -3,8 +3,12 @@
  */
 package com.platzi.ereservation.vista.resources;
 
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -67,4 +71,16 @@ public class ReservaResource {
 		return new ResponseEntity<>(this.reservaService.update(reserva), HttpStatus.OK);
 	}
 
+	@DeleteMapping("/{codigoReserva}")
+	public void removeCliente(@PathVariable("codigoReserva") String codigoReserva) {
+		Reserva reserva = this.reservaService.findByCodigoRes(codigoReserva);
+		if (reserva != null) {
+			this.reservaService.delete(reserva);
+		}
+	}
+
+	@GetMapping
+	public ResponseEntity<List<Reserva>> findAll() {
+		return ResponseEntity.ok(this.reservaService.findAll());
+	}
 }
