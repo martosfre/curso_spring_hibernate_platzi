@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.platzi.ereservation.modelo.Cliente;
 import com.platzi.ereservation.modelo.Reserva;
@@ -15,6 +16,7 @@ import com.platzi.ereservation.negocio.repository.ReservaRepository;
  *
  */
 @Service
+@Transactional(readOnly = true)
 public class ReservaService {
 
 	private final ReservaRepository reservaRepository;
@@ -29,6 +31,7 @@ public class ReservaService {
 	 * @param reserva
 	 * @return
 	 */
+	@Transactional
 	public Reserva create(Reserva reserva) {
 		return this.reservaRepository.save(reserva);
 	}
@@ -39,6 +42,7 @@ public class ReservaService {
 	 * @param reserva
 	 * @return
 	 */
+	@Transactional
 	public Reserva update(Reserva reserva) {
 		return this.reservaRepository.save(reserva);
 	}
@@ -48,6 +52,7 @@ public class ReservaService {
 	 * 
 	 * @param reserva
 	 */
+	@Transactional
 	public void delete(Reserva reserva) {
 		this.reservaRepository.delete(reserva);
 	}
